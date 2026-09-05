@@ -128,6 +128,9 @@ python src/test_llm.py
 
 The queue and audit test scripts intentionally add or update demo records in `data/`.
 
+## Deployed Links 
+- https://razorpay-ai-risk-manager-2bwwgnqe4sxrvapfmhztzc.streamlit.app/
+
 ## Notes
 
 - The model artifacts were trained with scikit-learn 1.9.0; use the version declared in `requirements.txt` to avoid model-serialization warnings.

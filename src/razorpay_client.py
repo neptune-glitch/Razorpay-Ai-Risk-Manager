@@ -1,5 +1,4 @@
 import os
-import razorpay
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -20,6 +19,13 @@ def create_order(amount, currency="INR"):
         raise RuntimeError(
             "RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET not found in environment variables."
         )
+
+    try:
+        import razorpay
+    except ModuleNotFoundError as error:
+        raise RuntimeError(
+            "Razorpay SDK is unavailable. Install the dependencies and redeploy."
+        ) from error
 
     client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
     amount_paise = int(amount * 100)

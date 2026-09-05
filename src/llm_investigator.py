@@ -1,17 +1,57 @@
-import os
 import json
+import os
+from pathlib import Path
 
-from google import genai
 from dotenv import load_dotenv
 
+try:
+    from google import genai
+except ImportError:  # pragma: no cover - handled gracefully at runtime.
+    genai = None
 
-# ==========================================
-# LOAD ENVIRONMENT VARIABLES
-# ==========================================
 
-load_dotenv()
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-API_KEY = os.getenv("GEMINI_API_KEY")
+
+def _dotenv_candidates():
+    """Return the most likely .env locations for this project."""
+    candidates = [
+        Path.cwd() / ".env",
+        PROJECT_ROOT / ".env",
+    ]
+
+    for parent in [Path.cwd(), PROJECT_ROOT]:
+        for path in parent.parents:
+            candidates.append(path / ".env")
+
+    seen = set()
+    ordered = []
+    for path in candidates:
+        resolved = path.resolve(strict=False)
+        if resolved not in seen:
+            seen.add(resolved)
+            ordered.append(resolved)
+    return ordered
+
+
+def resolve_api_key():
+    """Read the project .env reliably, regardless of the current working directory."""
+    for key_name in ("GEMINI_API_KEY", "GOOGLE_API_KEY"):
+        api_key = os.getenv(key_name)
+        if api_key and api_key.strip():
+            return api_key.strip()
+
+    for dotenv_path in _dotenv_candidates():
+        load_dotenv(dotenv_path=dotenv_path, override=False)
+        for key_name in ("GEMINI_API_KEY", "GOOGLE_API_KEY"):
+            api_key = os.getenv(key_name)
+            if api_key and api_key.strip():
+                return api_key.strip()
+
+    return None
+
+
+API_KEY = resolve_api_key()
 
 
 # ==========================================
@@ -108,12 +148,18 @@ Repeat the risk engine recommendation exactly.
     # GEMINI REQUEST
     # ==========================================
 
-    if not API_KEY:
-        raise RuntimeError("GEMINI_API_KEY is not configured.")
+    api_key = resolve_api_key()
+    if not api_key:
+        raise RuntimeError(
+            "Gemini is unavailable: set GEMINI_API_KEY or GOOGLE_API_KEY in the environment or project .env."
+        )
 
-    client = genai.Client(api_key=API_KEY)
+    if genai is None:
+        raise RuntimeError("google-genai is not installed in the active environment.")
+
+    client = genai.Client(api_key=api_key)
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         contents=prompt
     )
 

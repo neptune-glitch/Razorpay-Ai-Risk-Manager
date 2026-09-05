@@ -1,0 +1,2 @@
+timestamp,transaction_id,merchant_id,amount,risk_score,risk_level,status,reason
+2026-09-05 18:13:41,QUEUE_TEST_001,MERCHANT_001,750,65.5,MEDIUM,INVESTIGATING,High transaction velocity; Multiple behavioral risk signals detected

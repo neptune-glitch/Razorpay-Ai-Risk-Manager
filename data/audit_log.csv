@@ -1,0 +1,15 @@
+timestamp,transaction_id,risk_score,risk_level,ai_recommendation,investigator_decision,reason
+2026-09-04 20:56:03,TEST_TXN_001,89.5,HIGH,BLOCK,BLOCK,Confirmed suspicious transaction
+2026-09-04 21:00:49,TEST_TXN_001,89.5,HIGH,BLOCK,BLOCK,Confirmed suspicious transaction
+2026-09-04 21:10:27,TEST_TXN_001,89.5,HIGH,BLOCK,BLOCK,Confirmed suspicious transaction
+2026-09-05 16:30:31,GATEWAY_TEST_001,97.0,HIGH,BLOCK,BLOCK,Transaction amount is 35.1× the normal average; High transaction velocity; Multiple failed payment attempts; New IP address detected; Multiple behavioral risk signals detected; Transaction behavior is highly unusual
+2026-09-05 16:31:02,TEST_TXN_001,89.5,HIGH,BLOCK,BLOCK,Confirmed suspicious transaction
+2026-09-05 16:34:27,GATEWAY_TEST_001,97.0,HIGH,BLOCK,BLOCK,Transaction amount is 35.1× the normal average; High transaction velocity; Multiple failed payment attempts; New IP address detected; Multiple behavioral risk signals detected; Transaction behavior is highly unusual
+2026-09-05 16:34:41,TEST_TXN_001,89.5,HIGH,BLOCK,BLOCK,Confirmed suspicious transaction
+2026-09-05 16:43:43,DASHBOARD_TXN_001,1.81,LOW,APPROVE,APPROVE,Payment approved by risk engine
+2026-09-05 16:45:20,DASHBOARD_TXN_001,99.0,HIGH,BLOCK,BLOCK,Transaction amount is 34.9× the normal average; High transaction velocity; Multiple failed payment attempts; New device detected; New IP address detected; Multiple behavioral risk signals detected; Transaction behavior is highly unusual
+2026-09-05 16:51:48,DASHBOARD_TXN,1.81,LOW,APPROVE,APPROVE,Payment approved by risk engine
+2026-09-05 16:54:50,DASHBOARD_TXN,94.2,HIGH,BLOCK,BLOCK,Transaction amount is 46.8× the normal average; High transaction velocity; Multiple failed payment attempts; New device detected; New IP address detected; Multiple behavioral risk signals detected; Transaction behavior is highly unusual
+2026-09-05 16:54:54,DASHBOARD_TXN,94.2,HIGH,BLOCK,BLOCK,Transaction amount is 46.8× the normal average; High transaction velocity; Multiple failed payment attempts; New device detected; New IP address detected; Multiple behavioral risk signals detected; Transaction behavior is highly unusual
+2026-09-05 17:22:18,TEST_TXN_001,89.5,HIGH,BLOCK,BLOCK,Confirmed suspicious transaction
+2026-09-05 18:14:08,GATEWAY_TEST_001,97.0,HIGH,BLOCK,BLOCK,Transaction amount is 35.1× the normal average; High transaction velocity; Multiple failed payment attempts; New IP address detected; Multiple behavioral risk signals detected; Transaction behavior is highly unusual

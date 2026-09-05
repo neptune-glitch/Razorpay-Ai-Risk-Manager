@@ -1,0 +1,66 @@
+[
+    {
+        "transaction_id": "TXN_008026",
+        "action": "APPROVE",
+        "risk_score": 80.86,
+        "risk_level": "HIGH",
+        "reason": "Approved by investigator",
+        "timestamp": "2026-09-04T19:09:48"
+    },
+    {
+        "transaction_id": "TXN_008026",
+        "action": "MANUAL_REVIEW",
+        "risk_score": 80.86,
+        "risk_level": "HIGH",
+        "reason": "Escalated for manual investigation",
+        "timestamp": "2026-09-04T19:09:51"
+    },
+    {
+        "transaction_id": "TXN_008026",
+        "action": "BLOCK",
+        "risk_score": 80.86,
+        "risk_level": "HIGH",
+        "reason": "Blocked by investigator",
+        "timestamp": "2026-09-04T19:09:55"
+    },
+    {
+        "transaction_id": "TXN_008026",
+        "action": "APPROVE",
+        "risk_score": 80.86,
+        "risk_level": "HIGH",
+        "reason": "Approved by investigator",
+        "timestamp": "2026-09-04T19:10:30"
+    },
+    {
+        "transaction_id": "TXN_008026",
+        "action": "APPROVE",
+        "risk_score": 80.86,
+        "risk_level": "HIGH",
+        "reason": "Approved by investigator",
+        "timestamp": "2026-09-04T19:20:59"
+    },
+    {
+        "transaction_id": "TXN_008026",
+        "action": "APPROVE",
+        "risk_score": 80.86,
+        "risk_level": "HIGH",
+        "reason": "Approved by investigator",
+        "timestamp": "2026-09-04T19:21:01"
+    },
+    {
+        "transaction_id": "TXN_008026",
+        "action": "APPROVE",
+        "risk_score": 80.86,
+        "risk_level": "HIGH",
+        "reason": "Approved by investigator",
+        "timestamp": "2026-09-04T19:26:17"
+    },
+    {
+        "transaction_id": "TXN_008026",
+        "action": "MANUAL_REVIEW",
+        "risk_score": 80.86,
+        "risk_level": "HIGH",
+        "reason": "Escalated for manual investigation",
+        "timestamp": "2026-09-04T19:26:21"
+    }
+]

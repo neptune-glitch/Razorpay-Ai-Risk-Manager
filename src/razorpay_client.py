@@ -8,20 +8,6 @@ load_dotenv()
 RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")
 RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
 
-if not RAZORPAY_KEY_ID or not RAZORPAY_KEY_SECRET:
-    raise ValueError(
-        "RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET not found in environment variables."
-    )
-
-# Create Razorpay client
-client = razorpay.Client(
-    auth=(
-        RAZORPAY_KEY_ID,
-        RAZORPAY_KEY_SECRET
-    )
-)
-
-
 def create_order(amount, currency="INR"):
     """
     Create a Razorpay order.
@@ -30,6 +16,12 @@ def create_order(amount, currency="INR"):
     Razorpay expects amount in paise.
     """
 
+    if not RAZORPAY_KEY_ID or not RAZORPAY_KEY_SECRET:
+        raise RuntimeError(
+            "RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET not found in environment variables."
+        )
+
+    client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
     amount_paise = int(amount * 100)
 
     order_data = {

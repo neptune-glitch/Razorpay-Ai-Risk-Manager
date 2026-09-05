@@ -1,8 +1,11 @@
 import pandas as pd
 
-from risk_engine import calculate_risk
-
-from investigation_agent import investigate_transaction
+try:
+    from .risk_engine import calculate_risk
+    from .investigation_agent import investigate_transaction
+except ImportError:  # Supports `python src/test_agent.py`.
+    from risk_engine import calculate_risk
+    from investigation_agent import investigate_transaction
 
 
 # ==========================================

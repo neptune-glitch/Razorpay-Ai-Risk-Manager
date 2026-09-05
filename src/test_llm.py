@@ -1,7 +1,9 @@
 import pandas as pd
 
-from agent import investigate
-from llm_investigator import generate_investigation_report
+try:
+    from .agent import investigate
+except ImportError:  # Supports `python src/test_llm.py`.
+    from agent import investigate
 
 
 # ==========================================
@@ -37,11 +39,7 @@ result = investigate(
 # GENERATE LLM REPORT
 # ==========================================
 
-report = generate_investigation_report(
-    transaction,
-    result,
-    result["evidence"]
-)
+report = result["ai_report"]
 
 
 # ==========================================

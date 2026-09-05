@@ -1006,29 +1006,13 @@ if st.button(
     )
 
 
-    # --------------------------------------------------------
-    # Gemini Investigation
-    # --------------------------------------------------------
-
-    with st.spinner(
-        "Gemini is analyzing investigation evidence..."
-    ):
-
-        try:
-
-            report = generate_investigation_report(
-                selected_transaction,
-                investigation_result,
-                evidence
-            )
-
-        except Exception as e:
-
-            st.error(
-                f"Gemini investigation error: {e}"
-            )
-
-            st.stop()
+    # The agent already sends the collected evidence to Gemini.  Reusing its
+    # result avoids a duplicate API request and still allows evidence/audit
+    # actions when Gemini is not configured.
+    report = investigation_result.get(
+        "ai_report",
+        "Gemini investigation unavailable."
+    )
 
 
     # --------------------------------------------------------

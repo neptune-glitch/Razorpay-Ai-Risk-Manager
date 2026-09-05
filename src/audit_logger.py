@@ -3,7 +3,8 @@ import pandas as pd
 from datetime import datetime
 
 
-AUDIT_PATH = "data/audit_log.csv"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+AUDIT_PATH = os.path.join(PROJECT_ROOT, "data", "audit_log.csv")
 
 
 def log_investigator_action(

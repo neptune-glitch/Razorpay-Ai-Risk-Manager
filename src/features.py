@@ -48,6 +48,24 @@ def prepare_features(df):
 
     df = df.copy()
 
+    # Queue records can lack fields used by the trained models.  Neutral
+    # defaults keep scoring available while model-column alignment handles
+    # categorical feature differences.
+    numeric_columns = [
+        "amount", "avg_amount_24h", "std_amount_24h", "failed_attempts",
+        "transactions_1min", "transactions_5min", "transactions_10min",
+        "transactions_1hour", "new_device", "new_ip", "latitude",
+        "longitude", "previous_latitude", "previous_longitude",
+    ]
+    for column in numeric_columns:
+        if column not in df.columns:
+            df[column] = 0
+        df[column] = pd.to_numeric(df[column], errors="coerce").fillna(0)
+
+    if "payment_method" not in df.columns:
+        df["payment_method"] = "UNKNOWN"
+    df["payment_method"] = df["payment_method"].fillna("UNKNOWN")
+
     # ==========================================
     # 1. Amount behavior
     # ==========================================

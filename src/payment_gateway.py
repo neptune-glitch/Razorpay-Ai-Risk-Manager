@@ -1,7 +1,13 @@
-from risk_engine import calculate_risk
-from razorpay_client import create_order
-from audit_logger import log_investigator_action
-from investigation_queue import add_to_investigation_queue
+try:
+    from .risk_engine import calculate_risk
+    from .razorpay_client import create_order
+    from .audit_logger import log_investigator_action
+    from .investigation_queue import add_to_investigation_queue
+except ImportError:  # Supports `python src/payment_gateway.py`.
+    from risk_engine import calculate_risk
+    from razorpay_client import create_order
+    from audit_logger import log_investigator_action
+    from investigation_queue import add_to_investigation_queue
 
 
 # ============================================================
@@ -72,7 +78,7 @@ def process_payment(transaction):
     # STEP 3: MANUAL REVIEW
     # --------------------------------------------------------
 
-    if decision == "REVIEW":
+    if decision == "MANUAL_REVIEW":
 
         # Add transaction to investigation queue
         add_to_investigation_queue(
@@ -96,6 +102,9 @@ def process_payment(transaction):
             "risk_score": risk_score,
             "risk_level": risk_level,
             "decision": decision,
+            "ml_score": risk_result["ml_score"],
+            "anomaly_score": risk_result["anomaly_score"],
+            "behavioral_score": risk_result["behavioral_score"],
             "razorpay_order": None,
             "reasons": reasons
         }
@@ -129,6 +138,9 @@ def process_payment(transaction):
                 "risk_score": risk_score,
                 "risk_level": risk_level,
                 "decision": decision,
+                "ml_score": risk_result["ml_score"],
+                "anomaly_score": risk_result["anomaly_score"],
+                "behavioral_score": risk_result["behavioral_score"],
                 "razorpay_order": order,
                 "reasons": reasons
             }
@@ -151,6 +163,9 @@ def process_payment(transaction):
                 "risk_score": risk_score,
                 "risk_level": risk_level,
                 "decision": decision,
+                "ml_score": risk_result["ml_score"],
+                "anomaly_score": risk_result["anomaly_score"],
+                "behavioral_score": risk_result["behavioral_score"],
                 "razorpay_order": None,
                 "reasons": reasons
             }
@@ -165,6 +180,9 @@ def process_payment(transaction):
         "risk_score": risk_score,
         "risk_level": risk_level,
         "decision": decision,
+        "ml_score": risk_result["ml_score"],
+        "anomaly_score": risk_result["anomaly_score"],
+        "behavioral_score": risk_result["behavioral_score"],
         "razorpay_order": None,
         "reasons": reasons
     }

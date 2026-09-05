@@ -1,12 +1,15 @@
 import pandas as pd
 
-from investigation_tools import (
-    check_merchant_history,
-    check_device_history,
-    check_ip_history,
-    check_transaction_velocity,
-    check_location_anomaly
-)
+try:
+    from .investigation_tools import (
+        check_merchant_history, check_device_history, check_ip_history,
+        check_transaction_velocity, check_location_anomaly,
+    )
+except ImportError:  # Supports `python src/test_tools.py`.
+    from investigation_tools import (
+        check_merchant_history, check_device_history, check_ip_history,
+        check_transaction_velocity, check_location_anomaly,
+    )
 
 
 # ==========================================

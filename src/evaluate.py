@@ -9,7 +9,10 @@ from sklearn.metrics import (
     f1_score
 )
 
-from features import load_data, prepare_features
+try:
+    from .features import load_data, prepare_features
+except ImportError:  # Supports `python src/evaluate.py`.
+    from features import load_data, prepare_features
 
 
 # ==========================================

@@ -7,7 +7,8 @@ from datetime import datetime
 # INVESTIGATION QUEUE
 # ============================================================
 
-QUEUE_PATH = "data/investigation_queue.csv"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+QUEUE_PATH = os.path.join(PROJECT_ROOT, "data", "investigation_queue.csv")
 
 
 QUEUE_COLUMNS = [
@@ -89,24 +90,14 @@ def add_to_investigation_queue(transaction, risk_result):
 
     if os.path.exists(QUEUE_PATH):
 
-        existing_df = pd.read_csv(
-            QUEUE_PATH
-        )
-
-        # Make sure existing file has correct columns
-        if list(existing_df.columns) != QUEUE_COLUMNS:
-
-            existing_df = pd.DataFrame(
-                columns=QUEUE_COLUMNS
-            )
-
-        combined_df = pd.concat(
-            [
-                existing_df,
-                new_df
-            ],
-            ignore_index=True
-        )
+        # Repair legacy files rather than discarding their existing records.
+        existing_df = load_investigation_queue()
+        # Keep one, latest queue row per transaction for a stable UI.
+        existing_df = existing_df[
+            existing_df["transaction_id"].astype(str)
+            != str(record["transaction_id"])
+        ]
+        combined_df = pd.concat([existing_df, new_df], ignore_index=True)
 
         combined_df.to_csv(
             QUEUE_PATH,

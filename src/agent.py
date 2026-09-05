@@ -1,23 +1,28 @@
+import os
 import pandas as pd
 
-from risk_engine import calculate_risk
-
-from investigation_tools import (
-    check_merchant_history,
-    check_device_history,
-    check_ip_history,
-    check_transaction_velocity,
-    check_location_anomaly
-)
-
-from llm_investigator import generate_investigation_report
+try:
+    from .risk_engine import calculate_risk
+    from .investigation_tools import (
+        check_merchant_history, check_device_history, check_ip_history,
+        check_transaction_velocity, check_location_anomaly,
+    )
+    from .llm_investigator import generate_investigation_report
+except ImportError:  # Supports `python src/agent.py`.
+    from risk_engine import calculate_risk
+    from investigation_tools import (
+        check_merchant_history, check_device_history, check_ip_history,
+        check_transaction_velocity, check_location_anomaly,
+    )
+    from llm_investigator import generate_investigation_report
 
 
 # ============================================================
 # LOAD DATA
 # ============================================================
 
-DATA_PATH = "data/raw/transactions.csv"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "raw", "transactions.csv")
 
 df = pd.read_csv(DATA_PATH)
 
@@ -159,7 +164,9 @@ def investigate(transaction):
     try:
 
         ai_report = generate_investigation_report(
-            investigation_data
+            transaction,
+            investigation_data,
+            evidence,
         )
 
     except Exception as e:

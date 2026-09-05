@@ -1,7 +1,7 @@
-from audit_logger import (
-    log_investigator_action,
-    load_audit_log
-)
+try:
+    from .audit_logger import log_investigator_action, load_audit_log
+except ImportError:  # Supports `python src/test_audit.py`.
+    from audit_logger import log_investigator_action, load_audit_log
 
 
 print("\n==========================================")

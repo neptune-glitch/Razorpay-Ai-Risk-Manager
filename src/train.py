@@ -3,7 +3,10 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, IsolationForest
 
-from features import load_data, prepare_features
+try:
+    from .features import load_data, prepare_features
+except ImportError:  # Supports `python src/train.py`.
+    from features import load_data, prepare_features
 
 
 # ==========================================

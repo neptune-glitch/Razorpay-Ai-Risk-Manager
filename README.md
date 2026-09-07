@@ -33,6 +33,15 @@ RAZORPAY_KEY_ID=your_razorpay_key_id
 RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 ```
 
+For Streamlit Cloud, open the app settings, choose **Secrets**, and add the same
+values in TOML format. Do not commit these values to Git:
+
+```toml
+GEMINI_API_KEY = "your_gemini_key"
+RAZORPAY_KEY_ID = "your_razorpay_key_id"
+RAZORPAY_KEY_SECRET = "your_razorpay_key_secret"
+```
+
 Without a Gemini key, investigations still collect and display evidence; the report states that Gemini is unavailable. Without Razorpay credentials, only an approved payment's order-creation step fails gracefully.
 
 ## Run the application

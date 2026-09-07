@@ -41,6 +41,17 @@ def resolve_api_key():
         if api_key and api_key.strip():
             return api_key.strip()
 
+    # Streamlit Cloud exposes app secrets through st.secrets rather than .env.
+    try:
+        import streamlit as st
+
+        for key_name in ("GEMINI_API_KEY", "GOOGLE_API_KEY"):
+            api_key = st.secrets.get(key_name)
+            if api_key and str(api_key).strip():
+                return str(api_key).strip()
+    except Exception:  # Local runs may not have a Streamlit secrets file.
+        pass
+
     for dotenv_path in _dotenv_candidates():
         load_dotenv(dotenv_path=dotenv_path, override=False)
         for key_name in ("GEMINI_API_KEY", "GOOGLE_API_KEY"):

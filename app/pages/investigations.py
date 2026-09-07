@@ -1181,6 +1181,14 @@ if (
 
                 queue_status = decision
 
+                if decision == "APPROVE":
+
+                    queue_status = "APPROVED"
+
+                elif decision == "BLOCK":
+
+                    queue_status = "BLOCKED"
+
                 if decision == "MANUAL_REVIEW":
 
                     queue_status = "REVIEW"
